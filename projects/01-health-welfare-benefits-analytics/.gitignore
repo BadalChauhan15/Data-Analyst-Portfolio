@@ -1,0 +1,11 @@
+# Do not commit credentials, local DB files, or real client/employee data.
+*.sqlitedb
+*.db
+.env
+.env.*
+*.pem
+*.key
+# Keep synthetic CSV data only if appropriate for the repository.
+# Exclude MySQL exports/backups:
+*.sql.gz
+*.dump

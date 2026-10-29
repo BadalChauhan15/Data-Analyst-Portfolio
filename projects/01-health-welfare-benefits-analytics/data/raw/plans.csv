@@ -1,0 +1,32 @@
+plan_id,client_id,benefit_type,plan_name,vendor_name,effective_date,end_date
+P001,C001,Medical,Medical Core,MapleShield,2024-01-01,2025-12-31
+P002,C001,Medical,Medical Plus,Juniper Assurance,2024-01-01,
+P003,C001,Dental,Dental Core,Aster Benefits,2024-01-01,
+P004,C001,Vision,Vision Core,Cobalt Health,2024-01-01,
+P005,C002,Medical,Medical Core,Cobalt Health,2024-01-01,
+P006,C002,Medical,Medical Plus,MapleShield,2024-01-01,2025-12-31
+P007,C002,Dental,Dental Core,MapleShield,2025-01-01,
+P008,C003,Medical,Medical Core,Aster Benefits,2024-01-01,
+P009,C003,Vision,Vision Core,Cobalt Health,2024-01-01,
+P010,C004,Medical,Medical Core,Aster Benefits,2024-01-01,2025-12-31
+P011,C004,Dental,Dental Core,Cobalt Health,2024-01-01,
+P012,C005,Medical,Medical Core,Juniper Assurance,2024-01-01,2025-12-31
+P013,C005,Medical,Medical Plus,Juniper Assurance,2024-01-01,
+P014,C005,Dental,Dental Core,Juniper Assurance,2024-01-01,
+P015,C005,Vision,Vision Core,Cobalt Health,2024-01-01,
+P016,C006,Medical,Medical Core,Aster Benefits,2024-01-01,
+P017,C006,Medical,Medical Plus,Aster Benefits,2024-01-01,
+P018,C006,Dental,Dental Core,MapleShield,2024-01-01,
+P019,C006,Dental,Dental Plus,Aster Benefits,2025-01-01,
+P020,C006,Vision,Vision Core,Juniper Assurance,2024-01-01,
+P021,C007,Medical,Medical Core,Juniper Assurance,2024-01-01,
+P022,C007,Dental,Dental Core,MapleShield,2024-01-01,
+P023,C008,Medical,Medical Core,MapleShield,2025-01-01,
+P024,C008,Dental,Dental Core,Aster Benefits,2024-01-01,
+P025,C008,Vision,Vision Core,Juniper Assurance,2024-01-01,
+P026,C009,Medical,Medical Core,MapleShield,2024-01-01,
+P027,C009,Dental,Dental Core,Aster Benefits,2024-01-01,
+P028,C009,Vision,Vision Core,Cobalt Health,2024-01-01,
+P029,C010,Medical,Medical Core,MapleShield,2024-01-01,
+P030,C010,Medical,Medical Plus,Cobalt Health,2025-01-01,2025-12-31
+P031,C010,Vision,Vision Core,Aster Benefits,2024-01-01,
