@@ -2,11 +2,15 @@ phase,task,status,actual_result_recorded,next_action
 Project 1 / Setup,Create database and tables,Completed,Yes,None
 Project 1 / Setup,Import five synthetic datasets,Completed,Yes,None
 Project 1 / Setup,Verify row counts,Completed,Yes,None
-Project 1 / Step 1,Missing department/location profiling,Completed - results not recorded,No,Copy actual output into results/step1_results.md
-Project 1 / Step 1,Enrollment status distribution,Completed - results not recorded,No,Copy actual output into results/step1_results.md
-Project 1 / Step 1,Duplicate business record profiling,Completed - results not recorded,No,Copy actual output into results/step1_results.md
-Project 1 / Step 1,Employee-client/plan-client mismatch profiling,Completed - results not recorded,No,Copy actual output into results/step1_results.md
-Project 1 / Step 2,Plan/coverage date validation,Not started,No,Create next SQL script
-Project 1 / Step 2,Document cleaning rules and findings,Not started,No,After profiling
-Project 1 / Analysis,Eligibility and enrollment metrics,Not started,No,After data-quality rules
-Project 1 / Power BI,Dashboard,Not started,No,After metrics are validated
+Project 1 / Step 1,Missing department/location profiling,Completed,Yes,Results and interpretation recorded in results/step1_results.md
+Project 1 / Step 1,Enrollment status distribution,Completed,Yes,Results and interpretation recorded in results/step1_results.md
+Project 1 / Step 1,Duplicate business-combination profiling,Completed,Yes,24 repeated combinations identified; investigate individual records in Step 2 Task 3
+Project 1 / Step 1,Employee-client/plan-client mismatch profiling,Completed,Yes,20 mismatches identified; investigate records in Step 2 Task 4
+Project 1 / Step 2,Investigate missing department/location records,Completed,Yes,"30 affected employees: 17 missing department, 13 missing location, 0 missing both"
+Project 1 / Step 2,Investigate enrollment status variations and flagged records,Investigation completed; business validation pending,Yes,Seven distinct status values documented; 8 Unknown/In progress records inspected; reference validation returned 0 unmatched rows
+Project 1 / Step 2,Investigate repeated enrollment combinations,Not started,No,Next: compare enrollment IDs and statuses for the 24 repeated combinations
+Project 1 / Step 2,Investigate employee-client/plan-client mismatches,Not started,No,Review the 20 flagged enrollment records against business rules
+Project 1 / Step 2,Validate plan end dates and coverage periods,Not started,No,Review 26 assumed plans.end_date values set to 2025-12-31 during import
+Project 1 / Step 2,Document approved data-cleaning rules and findings,Not started,No,After investigations and business-rule validation; preserve raw source data
+Project 1 / Analysis,Build validated eligibility and enrollment metrics,Not started,No,After data-quality rules are confirmed
+Project 1 / Power BI,Build dashboard,Not started,No,After metrics are validated

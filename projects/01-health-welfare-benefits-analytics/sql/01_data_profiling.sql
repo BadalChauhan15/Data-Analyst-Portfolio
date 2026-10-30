@@ -1,6 +1,6 @@
--- Project 1: Health & Welfare Benefits Analytics
 -- Step 1: Data profiling
--- MySQL 8.0+
+-- Project: Health & Welfare Benefits Analytics
+-- Database: MySQL
 -- Read-only SELECT queries. Run one query at a time and record actual results.
 
 USE benefits_analytics;
