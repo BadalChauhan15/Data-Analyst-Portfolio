@@ -6,7 +6,7 @@ A project-based portfolio documenting hands-on practice in SQL, Excel, Power BI,
 
 | Project | Status | Tools | Focus |
 |---|---|---|---|
-| [01 — Health & Welfare Benefits Analytics](projects/01-health-welfare-benefits-analytics/README.md) | Step 1 documented | MySQL; Excel and Power BI planned | Eligibility, enrollment, data quality |
+| [01 — Health & Welfare Benefits Analytics](projects/01-health-welfare-benefits-analytics/README.md) | Step 1 documented & Step 2 is in progress | MySQL; Excel and Power BI planned | Eligibility, enrollment, data quality |
 | [02 — Retail Sales & Customer Analytics](projects/02-retail-sales-analytics/README.md) | Planned | SQL, Excel, Power BI | Revenue, products, customers |
 | [03 — Operations & Data Quality Analytics](projects/03-operations-data-quality-analytics/README.md) | Planned | SQL, Excel, Power BI | Turnaround time, SLA, exceptions |
 
