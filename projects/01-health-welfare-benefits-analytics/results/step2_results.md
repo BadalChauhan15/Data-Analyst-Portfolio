@@ -183,59 +183,88 @@ However, the correct enrollment status cannot be determined from reference valid
 
 **Investigation performed:**
 
-The Step 1 query identified 24 repeated combinations using `employee_id`, `plan_id`, `coverage_start_date`, and `coverage_end_date`. The Step 2 detail query retrieves the individual enrollment records, including `enrollment_id` and `enrollment_status`, for comparison.
+The Step 1 query identified 24 repeated combinations using `employee_id`, `plan_id`, `coverage_start_date`, and `coverage_end_date`. The Step 2 detail query retrieved the individual enrollment records, including `enrollment_id` and `enrollment_status`, for comparison.
 
 **Step 1 actual results:**
 
 - Repeated combinations identified: 24
-- Records involved: 48, assuming each combination occurs exactly twice
-- Records beyond one per combination: 24, under the same assumption
+- Records involved: 48, confirmed (each combination occurs exactly twice)
+- Records beyond one per combination: 24
 
-**Step 2 record-level results:** _Not recorded yet. Run Tasks 3A and 3B and inspect the returned rows._
+**Step 2 record-level results:**
+
+- Repeated combinations investigated: 24
+- Individual enrollment records retrieved: 48
+- Records per combination: 2
+- Pairs with `Active` status: 23
+- Pairs with `Cancelled` status: 1
+- Enrollment IDs: Different for each record within a pair
+- Employee ID, plan ID, coverage start date, coverage end date, and enrollment status: Matching within each pair
+- Exact duplicates returned by Task 3C: 0 rows
 
 **Interpretation:**
 
-A repeated business-key combination means the same employee, plan, and coverage period occur more than once. This is a potential duplicate, but it does not automatically mean the records are invalid. Compare the individual enrollment IDs and statuses and check the applicable business rules.
+The investigation confirmed 24 repeated business-key combinations involving 48 enrollment records. Each combination occurs exactly twice. Although the records share the same employee, plan, coverage period, and enrollment status, they have different `enrollment_id` values.
+
+These are potential duplicate enrollments, but they are not confirmed data errors. The `enrollment_id` column is a primary key, and Task 3C's grouping across all six columns returned zero rows. However, this does not independently establish whether the repeated business-key combinations are legitimate.
 
 **Recommended actions:**
 
-1. Review each repeated combination and its individual records.
+1. Review all 24 repeated combinations and their individual enrollment records.
 2. Compare `enrollment_id` and `enrollment_status`.
 3. Check whether repeated combinations are permitted by the business process.
-4. Confirm whether all 24 combinations occur exactly twice before relying on the 48-record and 24-excess-record totals.
+4. Confirm the business rules governing multiple enrollments for the same employee, plan, and coverage period.
 5. Do not delete records unless they are confirmed as invalid and the correction is approved.
 
 ### Task 4 — Employee/Client versus Plan/Client Mismatch
 
 **Investigation performed:**
 
-The Step 1 query identified enrollment records where the employee's `client_id` differs from the associated plan's `client_id`. The Step 2 query retrieves enrollment, employee, plan, status, and coverage details for review.
+The Step 1 query identified enrollment records where the employee's client_id differs from the associated plan's client_id. The Step 2 investigation retrieved individual enrollment records, summarized mismatches by employee-client and plan-client pair, checked employee and plan references, and checked for repeated enrollment business-key combinations among the mismatches.
 
 **Step 1 actual results:**
-
 - Mismatched enrollment records identified: 20
 
-**Step 2 record-level results:** _Not recorded yet. Run Task 4 and inspect the returned rows._
+**Step 2 record-level results:**
+- Mismatched enrollment records returned by Task 4A: 22
+- Current mismatch count independently rechecked: 22
+- Current database: benefits_analytics
+- Distinct employee-client / plan-client pairs in Task 4B: 20
+- Client pairs with 2 mismatched records: 2
+- Client pairs with 1 mismatched record: 18
+- Missing employee or plan references in Task 4C: 0
+- Repeated business-key combinations among mismatched records in Task 4D: 0
 
 **Interpretation:**
 
-These 20 records have different client IDs for the employee and the associated plan. This may indicate an incorrect employee or plan assignment, but it could also be permitted by a business rule or exception. The records need to be checked against reliable source information before being classified as errors.
+The current database contains 22 enrollment records where the employee's client ID differs from the associated plan's client ID. Task 4B groups these records into 20 distinct employee-client / plan-client pairs. Two pairs contain two records each, while the other 18 pairs contain one record each.
+
+Task 4C returned no rows, so all enrollment records checked had matching employee and plan references. Task 4D returned no repeated business-key combinations among the mismatches. These checks do not establish that the client assignments are valid or invalid.
+
+The Step 2 count of 22 is two higher than the Step 1 baseline of 20. The same join and mismatch condition were used, and a separate count query in benefits_analytics also returned 22. The historical reason for the difference cannot be determined from the available evidence; no Step 1 historical snapshot or original execution output was available to reconcile it.
 
 **Recommended actions:**
 
-1. Review all 20 flagged enrollment records.
-2. Verify the employee's client assignment and the plan's client assignment.
-3. Confirm whether cross-client enrollment is permitted.
-4. Correct a record only when the discrepancy and correct value have been verified and the correction is approved.
-5. Rerun the mismatch query after any approved correction.
+1. Review all 22 flagged enrollment records.
+2. Verify the employee's client assignment and the plan's client assignment against reliable source information.
+3. Confirm whether cross-client enrollment is permitted by the business process or approved exceptions.
+4. Retain the Step 1 baseline of 20 as the historical recorded result and use 22 as the verified current result; do not silently overwrite the historical figure.
+5. Correct a record only when the discrepancy and correct value have been verified and the correction is approved.
+6. Rerun the mismatch query after any approved correction.
 
 ## 3. Step 2 Summary
 
-The investigation has progressed beyond the initial profiling counts by retrieving the employee records affected by missing department and location values. The results confirm 30 affected employees: 17 with a missing department, 13 with a missing location, and none with both fields missing.
+The investigation progressed beyond the initial profiling counts by retrieving and reviewing individual records across all four data-quality areas.
 
-The other three areas—enrollment status labels, repeated enrollment combinations, and employee/plan client mismatches—still require record-level review. Their Step 1 counts are retained as the starting point; detailed Step 2 findings should be added after the corresponding queries have been run and reviewed.
+The missing department and location investigation confirmed 30 affected employees: 17 with a missing department, 13 with a missing location, and none with both fields missing.
 
-No data-cleaning changes have been made as part of this investigation. Any proposed correction must be supported by source data and the applicable business rules.
+The enrollment status investigation identified seven distinct source values: `Active`, `Pending`, `Cancelled`, `Unknown`, `ACTIVE`, `active`, and `In progress`. The six `Unknown` and two `In progress` records were inspected, and all eight had matching employee and plan references. However, their correct business meanings and the standardization of capitalization variations still require confirmation.
+
+The duplicate enrollment investigation confirmed 24 repeated business-key combinations involving 48 enrollment records. Each combination occurred exactly twice. The individual records had different enrollment IDs, with 23 pairs having `Active` status and one pair having `Cancelled` status. These combinations are potential duplicates and require business validation before any correction.
+
+The employee-client versus plan-client mismatch investigation returned 22 mismatched enrollment records in the current `benefits_analytics` database. These records represented 20 distinct employee-client and plan-client combinations. The reference validation returned zero missing employee or plan references, and no repeated business-key combinations were identified among the mismatched records. The Step 1 baseline was 20 records; the reason for the difference between the historical baseline and the current result of 22 remains unresolved.
+
+No data-cleaning changes have been made as part of this investigation. The findings identify potential data-quality issues, but business rules and reliable source information must be used to validate them before applying corrections.
 
 ## 4. Scope and Assumptions
 
@@ -245,23 +274,43 @@ This step investigates the data-quality findings raised during Step 1:
 
 - Retrieve employees with missing or blank department and location values.
 - Check whether any employee has both attributes missing.
-- Inspect records with enrollment status labels that may need review.
+- Inspect enrollment status distribution and investigate unusual or inconsistent status labels.
 - Retrieve individual records belonging to repeated enrollment business-key combinations.
+- Compare enrollment IDs and statuses within repeated combinations.
 - Inspect enrollment records where the employee's client ID differs from the plan's client ID.
-- Document findings and identify follow-up checks.
+- Summarize mismatches by employee-client and plan-client combinations.
+- Validate employee and plan references for missing records.
+- Check for repeated business-key combinations among mismatched enrollments.
+- Document actual findings, interpretations, limitations, and recommended follow-up checks.
 
 ### Assumptions and Limitations
 
 1. **Synthetic dataset:** The analysis uses a synthetic dataset created for portfolio practice. It does not represent verified production data from a real employer or benefits provider.
+
 2. **Missing values:** A department or location is treated as missing when it is `NULL` or contains only blank spaces.
+
 3. **Employee counts:** The 17 missing-department records and 13 missing-location records are separate groups because the combined query returned zero records with both fields missing. The either-field query therefore returned 30 records.
-4. **Status labels:** `Active` and `ACTIVE` remain separate source values until their equivalence is confirmed. `Unknown` and `In progress` are not assigned new meanings without business confirmation.
-5. **Repeated combinations:** The duplicate check uses employee, plan, coverage start date, and coverage end date as its business key. Repeated combinations are potential duplicates, not automatically invalid records.
-6. **Duplicate totals:** The estimate of 48 records involved and 24 excess records is valid only if all 24 repeated combinations occur exactly twice. Confirm individual counts before treating these totals as final.
-7. **Client mismatch:** The check assumes employee and plan client IDs should normally match. Any permitted exceptions must be confirmed from the business rules.
-8. **Read-only investigation:** The SQL file contains `SELECT` queries only. No records are updated or deleted in Step 2.
-9. **Results not yet supplied:** Detailed outputs for the status, duplicate, and client-mismatch investigations have not yet been recorded here. Add them after running the corresponding queries.
+
+4. **Status labels:** `Active`, `ACTIVE`, and `active` appear to be capitalization variations but remain separate source values until their equivalence is confirmed. `Unknown` and `In progress` are not assigned new meanings without business confirmation.
+
+5. **Status reference validation:** The eight records with `Unknown` and `In progress` statuses had matching employee and plan references. This confirms that the referenced records exist, but does not establish the correct enrollment status.
+
+6. **Repeated combinations:** The duplicate check uses `employee_id`, `plan_id`, `coverage_start_date`, and `coverage_end_date` as its business key. Repeated combinations are potential duplicates, not automatically invalid records.
+
+7. **Duplicate totals:** The investigation confirmed that all 24 repeated combinations occur exactly twice, involving 48 records and 24 records beyond one per combination. The records have different enrollment IDs. Task 3C returned zero rows when grouping by all six enrollment columns; because `enrollment_id` is a primary key, this result does not independently establish whether the repeated business-key combinations are legitimate.
+
+8. **Client mismatch:** The check assumes employee and plan client IDs should normally match. The current database returned 22 mismatched enrollment records, compared with the Step 1 recorded baseline of 20. The historical difference remains unexplained. Any permitted cross-client enrollment exceptions must be confirmed from the business rules.
+
+9. **Reference validation:** The Task 4C query returned zero rows, indicating no missing employee or plan references among the records checked. This does not confirm that the client assignments are correct.
+
+10. **Read-only investigation:** The SQL investigation scripts contain `SELECT` queries only. No records were updated or deleted during Step 2.
+
+11. **Business validation:** The enrollment status meanings, repeated enrollment combinations, and employee-client versus plan-client mismatches require confirmation against applicable business rules before any data-cleaning decisions are made.
+
+12. **Plan end-date assumption:** During dataset setup, 26 missing `plans.end_date` values were set to `2025-12-31` to resolve an import issue. This is an assumption, not a verified source value, and remains subject to review.
 
 ### Deliverable
 
-The Step 2 deliverables are the record-level investigation queries and this results document. Together, they provide a traceable record of what was checked, what has been confirmed, and which findings still require business validation before data cleaning.
+The Step 2 deliverables include the SQL investigation scripts, record-level query results, and this results document. Together, they provide a traceable record of the checks performed, verified findings, assumptions, and outstanding business validations.
+
+The investigation establishes a foundation for the next stage of data-quality validation and cleaning. Any proposed correction must be supported by reliable source information, approved business rules, and documented decisions while preserving the original raw data.

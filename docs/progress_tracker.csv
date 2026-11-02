@@ -1,16 +1,16 @@
-phase,task,status,actual_result_recorded,next_action
-Project 1 / Setup,Create database and tables,Completed,Yes,None
-Project 1 / Setup,Import five synthetic datasets,Completed,Yes,None
-Project 1 / Setup,Verify row counts,Completed,Yes,None
-Project 1 / Step 1,Missing department/location profiling,Completed,Yes,Results and interpretation recorded in results/step1_results.md
-Project 1 / Step 1,Enrollment status distribution,Completed,Yes,Results and interpretation recorded in results/step1_results.md
-Project 1 / Step 1,Duplicate business-combination profiling,Completed,Yes,24 repeated combinations identified; investigate individual records in Step 2 Task 3
-Project 1 / Step 1,Employee-client/plan-client mismatch profiling,Completed,Yes,20 mismatches identified; investigate records in Step 2 Task 4
-Project 1 / Step 2,Investigate missing department/location records,Completed,Yes,"30 affected employees: 17 missing department, 13 missing location, 0 missing both"
-Project 1 / Step 2,Investigate enrollment status variations and flagged records,Investigation completed; business validation pending,Yes,Seven distinct status values documented; 8 Unknown/In progress records inspected; reference validation returned 0 unmatched rows
-Project 1 / Step 2,Investigate repeated enrollment combinations,Not started,No,Next: compare enrollment IDs and statuses for the 24 repeated combinations
-Project 1 / Step 2,Investigate employee-client/plan-client mismatches,Not started,No,Review the 20 flagged enrollment records against business rules
-Project 1 / Step 2,Validate plan end dates and coverage periods,Not started,No,Review 26 assumed plans.end_date values set to 2025-12-31 during import
-Project 1 / Step 2,Document approved data-cleaning rules and findings,Not started,No,After investigations and business-rule validation; preserve raw source data
-Project 1 / Analysis,Build validated eligibility and enrollment metrics,Not started,No,After data-quality rules are confirmed
-Project 1 / Power BI,Build dashboard,Not started,No,After metrics are validated
+index,phase,task,status,actual_result_recorded,next_action
+0,Project 1 / Setup,Create database and tables,Completed,Yes,
+1,Project 1 / Setup,Import five synthetic datasets,Completed,Yes,
+2,Project 1 / Setup,Verify row counts,Completed,Yes,
+3,Project 1 / Step 1,Missing department/location profiling,Completed,Yes,Results and interpretation recorded in results/step1_results.md
+4,Project 1 / Step 1,Enrollment status distribution,Completed,Yes,Results and interpretation recorded in results/step1_results.md
+5,Project 1 / Step 1,Duplicate business-combination profiling,Completed,Yes,24 repeated combinations identified; record-level investigation completed in Step 2 Task 3
+6,Project 1 / Step 1,Employee-client/plan-client mismatch profiling,Completed,Yes,20 mismatches recorded as the Step 1 baseline; Step 2 current result is 22 and requires historical reconciliation
+7,Project 1 / Step 2,Investigate missing department/location records,Completed,Yes,"30 affected employees: 17 missing department, 13 missing location, 0 missing both"
+8,Project 1 / Step 2,Investigate enrollment status variations and flagged records,Investigation completed; business validation pending,Yes,Seven distinct status values documented; 8 Unknown/In progress records inspected; reference validation returned 0 unmatched rows
+9,Project 1 / Step 2,Investigate repeated enrollment combinations,Investigation completed; business validation pending,Yes,24 combinations; 48 records; each combination occurs twice; compare with business rules before classifying as invalid
+10,Project 1 / Step 2,Investigate employee-client/plan-client mismatches,Investigation completed; business validation and count reconciliation pending,Yes,22 current mismatches in benefits_analytics; Task 4B: 20 client pairs; Task 4C: 0 missing references; Task 4D: 0 repeated business-key combinations; reconcile Step 1 baseline of 20
+11,Project 1 / Step 2,Validate plan end dates and coverage periods,Not started,No,Review 26 assumed plans.end_date values set to 2025-12-31 during import
+12,Project 1 / Step 2,Document approved data-cleaning rules and findings,In progress,Partial,Investigations documented; complete after business-rule validation and approval; preserve raw source data
+13,Project 1 / Analysis,Build validated eligibility and enrollment metrics,Not started,No,After data-quality rules are confirmed
+14,Project 1 / Power BI,Build dashboard,Not started,No,After metrics are validated

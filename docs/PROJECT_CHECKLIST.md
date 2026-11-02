@@ -1,5 +1,7 @@
 # Portfolio Quality Checklist
 
+Use this checklist to track the quality and completeness of each portfolio project. Check an item only when the work is completed and documented.
+
 ## Project 1 — Health & Welfare Benefits Analytics
 
 ### Business context and data
@@ -12,8 +14,8 @@
 - [x] SQL investigation scripts are formatted and commented.
 - [x] Initial data-quality checks and assumptions are documented.
 - [x] Findings are distinguished from hypotheses and items requiring business validation.
-- [ ] Duplicate enrollment combinations have been investigated at record level.
-- [ ] Employee-client versus plan-client mismatches have been investigated at record level.
+- [x] Duplicate enrollment combinations have been investigated at record level.
+- [x] Employee-client versus plan-client mismatches have been investigated at record level.
 - [ ] Plan end dates and coverage periods have been validated.
 - [ ] Approved cleaning rules are documented, with raw source data preserved.
 - [ ] Results are validated against independent totals.
@@ -33,8 +35,9 @@
 ## Current Progress Note
 
 - Step 1 initial profiling is documented.
-- Step 2 Task 1 (missing department/location investigation) is completed.
-- Step 2 Task 2 (enrollment status investigation) has been performed; business meanings and any approved status corrections remain to be validated.
-- Step 2 Task 3 (duplicate enrollment investigation) is next.
-- Step 2 Task 4 (employee/client versus plan/client mismatch investigation) is pending.
+- Step 2 Task 1 (missing department/location) is investigated and documented.
+- Step 2 Task 2 (enrollment status) is investigated; business meanings and approved standardization remain pending.
+- Step 2 Task 3 (duplicate enrollment combinations) is investigated at record level; business validation remains pending.
+- Step 2 Task 4 (employee/client versus plan/client mismatch) is investigated at record level; business validation and the historical 20-versus-22 count reconciliation remain pending.
+- The current Task 4 mismatch count is 22 in database `benefits_analytics`; the Step 1 recorded baseline was 20.
 - The 26 `plans.end_date` values set to `2025-12-31` during import remain an assumption to review, not a verified source value.
