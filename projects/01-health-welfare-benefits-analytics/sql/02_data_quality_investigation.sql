@@ -86,6 +86,10 @@ WHERE TRIM(e.enrollment_status) IN ('Unknown', 'In progress')
       OR p.plan_id IS NULL
   );
 
+    e.plan_id,
+    e.coverage_start_date,
+    e.enrollment_id;
+
 -- Task 3A: Find repeated enrollment business-key combinations
 SELECT
     employee_id,

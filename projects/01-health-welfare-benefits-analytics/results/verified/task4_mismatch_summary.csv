@@ -1,8 +1,0 @@
-metric,count
-step1_baseline_records,20
-current_mismatch_records,22
-distinct_client_pairs,20
-pairs_with_two_records,2
-pairs_with_one_record,18
-missing_references,0
-repeated_business_keys,0
