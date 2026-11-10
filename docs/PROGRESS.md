@@ -2,15 +2,15 @@
 
 ## Current Status
 
-**Project 1: Health & Welfare Benefits Analytics — Step 1 completed; Step 2 in progress.**
+**Project 1: Health & Welfare Benefits Analytics — Step 1 completed; Step 2 investigations reported complete, business validation pending.**
 
 **Current focus:** Step 2 data-quality investigation.
 
 - Step 1: Initial data profiling documented.
 - Step 2, Task 1: Missing department and location investigation completed.
 - Step 2, Task 2: Enrollment status investigation completed for the records and checks performed so far.
-- Step 2, Task 3: Duplicate enrollment investigation is next.
-- Step 2, Task 4: Employee/client versus plan/client mismatch investigation is still pending.
+- Step 2, Task 3: Repeated enrollment combinations investigated; business validation remains pending.
+- Step 2, Task 4: Employee/client versus plan/client mismatches investigated; business validation and reconciliation with the Step 1 baseline remain pending.
 
 ## Completed
 
@@ -80,6 +80,20 @@ The investigation queries are saved in:
 
 `projects/01-health-welfare-benefits-analytics/sql/02_data_quality_investigation.sql`
 
+**Task 3: Repeated enrollment combinations — investigated**
+
+- 24 repeated business-key combinations were reported, each occurring twice (48 records total).
+- The reported status split is 23 Active pairs and one Cancelled pair.
+- These are potential duplicates only; business rules must be checked before classifying or correcting them.
+
+**Task 4: Employee/plan client mismatches — investigated**
+
+- The current reported query returned 22 mismatched enrollment records across 20 client pairs: two pairs have two records each and 18 pairs have one record each.
+- The reported checks found 0 missing employee or plan references and 0 repeated business keys among the mismatches.
+- The Step 1 baseline was 20 records; the difference from the current count of 22 is unresolved.
+
+The Task 3 and Task 4 summaries are in `projects/01-health-welfare-benefits-analytics/documentation/`. Aggregate CSV evidence is in `projects/01-health-welfare-benefits-analytics/results/verified/`. These values were reported during the project and have not been independently rerun as part of this package merge; no row-level SQL exports were supplied.
+
 ## Important Assumption to Revisit
 
 During dataset setup, 26 missing `plans.end_date` values were set to `2025-12-31` to resolve an import issue.
@@ -88,12 +102,12 @@ This date is an assumption, not a verified source value. It must be reviewed aga
 
 ## Next Steps
 
-1. **Step 2, Task 3:** Investigate the 24 repeated enrollment business-key combinations. Compare the individual enrollment IDs and statuses, and verify whether each combination occurs exactly twice.
-2. **Step 2, Task 4:** Investigate the 20 employee/client versus plan/client mismatches and validate them against the applicable business rules.
+1. Re-run the Task 3 and Task 4 queries against the raw source data and save genuine row-level outputs if needed.
+2. Validate duplicate and client/plan rules with authoritative business rules; reconcile the historical 20-versus-22 mismatch count.
 3. Review the 26 assumed plan end dates and validate coverage dates against plan effective dates.
 4. Document confirmed data-quality issues and approved cleaning rules without overwriting the raw source data.
 5. Build validated eligibility and enrollment metrics.
-6. Create a Power BI report and record progress in `docs/progress_tracker.csv`.
+6. Build and validate the Power BI report, then save the real `.pbix` and genuine screenshots.
 
 ## Working Principles
 

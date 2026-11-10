@@ -1,0 +1,7 @@
+metric,count
+repeated_business_key_combinations,24
+records_in_repeated_combinations,48
+records_beyond_one_per_combination,24
+combinations_occurring_twice,24
+Active_pairs,23
+Cancelled_pairs,1

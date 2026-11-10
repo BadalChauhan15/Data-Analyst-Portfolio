@@ -37,7 +37,8 @@ Use this checklist to track the quality and completeness of each portfolio proje
 - Step 1 initial profiling is documented.
 - Step 2 Task 1 (missing department/location) is investigated and documented.
 - Step 2 Task 2 (enrollment status) is investigated; business meanings and approved standardization remain pending.
-- Step 2 Task 3 (duplicate enrollment combinations) is investigated at record level; business validation remains pending.
-- Step 2 Task 4 (employee/client versus plan/client mismatch) is investigated at record level; business validation and the historical 20-versus-22 count reconciliation remain pending.
+- Step 2 Task 3 (duplicate enrollment combinations) is investigated at record level; the reported result is 24 combinations across 48 rows (23 Active pairs and one Cancelled pair), with business validation pending.
+- Step 2 Task 4 (employee/client versus plan/client mismatch) is investigated at record level; the reported current result is 22 records across 20 client pairs, with 0 missing references and 0 repeated keys among the mismatches. Business validation and the historical 20-versus-22 count reconciliation remain pending.
 - The current Task 4 mismatch count is 22 in database `benefits_analytics`; the Step 1 recorded baseline was 20.
 - The 26 `plans.end_date` values set to `2025-12-31` during import remain an assumption to review, not a verified source value.
+- These aggregate results were reported during the project and have not been independently rerun as part of this package merge. No row-level SQL result exports, completed Power BI `.pbix`, or genuine dashboard screenshots were supplied.

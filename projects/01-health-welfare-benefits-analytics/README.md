@@ -1,7 +1,7 @@
 # Health & Welfare Benefits Analytics
 
-**Status:** Step 1 data profiling documented; Step 2 investigation is next  
-**Tools:** MySQL / MySQL Workbench; Excel and Power BI planned  
+**Status:** Step 1 documented; Step 2 investigations reported complete, with business validation pending
+**Tools:** MySQL / MySQL Workbench; Power BI report specification provided
 **Data:** Synthetic dataset created for portfolio practice
 
 ## Business scenario
@@ -61,17 +61,26 @@ The initial checks covered:
 
 See [`results/step1_results.md`](results/step1_results.md) for the recorded results and recommended follow-up actions.
 
+## Step 2 — Investigations reported
+
+- Missing fields: 17 employees have missing department values, 13 have missing locations, 0 have both missing, and 30 have either field missing.
+- Enrollment statuses: seven source values were reported; the 8 `Unknown` or `In progress` records had employee and plan references. Their business meanings remain unconfirmed.
+- Repeated enrollment keys: 24 combinations across 48 records were reported, each occurring twice (23 Active pairs and one Cancelled pair). These are potential duplicates pending business validation.
+- Employee/plan client mismatches: 22 records across 20 client pairs were reported, with no missing references or repeated business keys among them. The Step 1 baseline of 20 remains unreconciled.
+
+These aggregate findings were reported during the project and have not been independently rerun as part of this package merge. See [`results/verified/`](results/verified/) for the summaries and [`results/PENDING_RESULTS.md`](results/PENDING_RESULTS.md) for outstanding work. No row-level SQL result exports were supplied.
+
 ## Assumption requiring review
 
 During import setup, 26 missing `plans.end_date` values were set to `2025-12-31` so the eligibility data could be imported. This is a temporary project assumption, not a generally valid imputation rule. Review those records during Step 2 and do not treat the assumed dates as verified source values.
 
 ## Next steps
 
-1. Investigate the Step 1 exceptions and validate the assumptions.
-2. Check plan effective dates against coverage dates.
+1. Re-run the Step 2 queries and save genuine row-level outputs as needed.
+2. Reconcile the mismatch count of 20 versus 22, validate duplicate and eligibility rules, and review the 26 assumed plan end dates against source rules.
 3. Define eligibility and enrollment business rules.
-4. Calculate enrollment metrics at a consistent employee-plan grain.
-5. Build a Power BI dashboard and document validated findings.
+4. Calculate and validate enrollment metrics at a consistent employee-plan grain.
+5. Build the Power BI dashboard from the supplied specifications, then save the real `.pbix` and genuine screenshots. The package does not include a completed `.pbix` or dashboard images.
 
 ## Data and privacy note
 

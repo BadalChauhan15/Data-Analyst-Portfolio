@@ -1,0 +1,5 @@
+metric,count
+missing_or_blank_department,17
+missing_or_blank_location,13
+both_fields_missing,0
+either_field_missing,30
